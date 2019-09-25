@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo-List with Socket.io</title>
+    <style>
+        li{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+<h1>TodoList realised with Socket.io</h1>
+<em>Exercice OpenClassrooms</em>
+<ul id="todolist"></ul>
+
+
+<input type="text" id="todo" placeholder="Faire les courses">
+<input type="button" id="add" value="Ajouter">
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+    $(function () {
+
+        let socket = io();
+
+        socket.on('refresh todo', (todoList) => {
+            $('#todolist').empty();
+            for(let i = 0; i<todoList.length; i++) {
+                $('#todolist').append('<li><input type="button" id="delete_'+i+'" value="X">'+todoList[i]+'</li>');
+
+                $('#delete_'+i).click(() => {
+                    socket.emit('delete todo', i);
+                });
+            }
+
+        });
+
+        socket.on('new user', () => {
+           console.log('Un nouvelle utiliateur viens de se connecter');
+        });
+
+        $('#add').click(() => {
+            socket.emit('new todo', $('#todo').val());
+            $('#todo').val('');
+        });
+
+        $('#delete').click(() => {
+            alert('sd');
+           socket.emit('delete todo', $('#delete_id').val());
+        });
+
+    });
+</script>
+</body>
+</html>

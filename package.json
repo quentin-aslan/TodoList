@@ -1,0 +1,15 @@
+{
+  "name": "TodoListSocketIO",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0"
+  },
+
+  "author": "Quentin Aslan <quentin.aslan@outlook.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quentin-aslan/TodoList"
+  }
+
+}
